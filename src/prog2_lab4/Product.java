@@ -32,7 +32,7 @@ if(IDS.contains(productID)){
     
 }
 else{
-IDS.add(productID);
+
 return productID;
 }
 
@@ -51,14 +51,49 @@ public void loadSet(HashSet <String> ID){
         throw new IllegalArgumentException("DUPLICATE IDS");
         
         }
+        
+        if(!validateName(productName)  || !validateName(manufacturerName)  || !validateName(supplierName) ){
+        throw new IllegalArgumentException("NAME CANNOT CONTAIN NUMBERS OR SPECIAL CHARACHTER");
+        }
+        
+        if(!validatePrice(price)){
+        throw new IllegalArgumentException("PRICE CANNOT BE ZERO OR NEGATIVE");
+        
+        }
         this.productID  = id;
         this.productName = productName;
         this.manufacturerName = manufacturerName;
         this.supplierName = supplierName;
         setQuantity(quantity);
         this.price = price;
+        IDS.add(productID);
     }
+    private boolean validatePrice(float price){
+    if(price <= 0){
+    return false;
+    
+    }
+    else {
+    return true;
+    
+    }
+    
+    }
+private boolean validateName(String name){
 
+if(name.matches("^[a-zA-Z]+$")){
+return true;
+
+
+}
+else{
+    
+    return false;
+}
+
+
+
+}
     public int getQuantity() {
         return quantity;
     }
@@ -85,5 +120,6 @@ public void loadSet(HashSet <String> ID){
     }
     
    
+
 
 }
