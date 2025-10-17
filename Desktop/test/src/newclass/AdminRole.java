@@ -100,6 +100,20 @@ public class AdminRole {
         writer.close();
     }
         
-      
+      public void logout() throws IOException
+      {
+          FileWriter writer = new FileWriter("Employees.txt",false);
+          PrintWriter p = new PrintWriter(writer);
+          
+          EmployeeUser[] users = getListOfEmployees();
+          
+          for (int i = 0; i < users.length; i ++)
+          {
+              if (users[i] != null)
+              {p.println(users[i].lineRepresentation());} //el line representation mwgoda fel EmployeeUser, lama a3ml abstract haytshal el error.
+          }
+          p.close();
+          writer.close();
+      }
     
 }
