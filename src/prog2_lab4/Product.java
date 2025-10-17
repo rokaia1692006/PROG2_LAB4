@@ -25,34 +25,16 @@ public class Product {
     private String productID , productName , manufacturerName , supplierName;
     private int quantity; // units available to sell
     private float price; 
-    private static HashSet <String> IDS = new HashSet<>();
-public final String ValidateID (String productID){
-if(IDS.contains(productID)){
-    return null;
-    
-}
-else{
-
-return productID;
-}
+   
 
 
-}
-public void loadSet(HashSet <String> ID){
-    if(ID  != null ){
-        IDS  = ID;
-    
-    }
 
-}
+
+
     public Product(String productID, String productName, String manufacturerName, String supplierName, int quantity, float price) {
-        String id = ValidateID(productID);
-        if(id == null){
-        throw new IllegalArgumentException("DUPLICATE IDS");
         
-        }
-        
-        if(!validateName(productName)  || !validateName(manufacturerName)  || !validateName(supplierName) ){
+       
+           if(!validateName(productName)  || !validateName(manufacturerName)  || !validateName(supplierName) ){
         throw new IllegalArgumentException("NAME CANNOT CONTAIN NUMBERS OR SPECIAL CHARACHTER");
         }
         
@@ -60,13 +42,14 @@ public void loadSet(HashSet <String> ID){
         throw new IllegalArgumentException("PRICE CANNOT BE ZERO OR NEGATIVE");
         
         }
-        this.productID  = id;
+     
+        this.productID  = productID;
         this.productName = productName;
         this.manufacturerName = manufacturerName;
         this.supplierName = supplierName;
         setQuantity(quantity);
         this.price = price;
-        IDS.add(productID);
+       
     }
     private boolean validatePrice(float price){
     if(price <= 0){
