@@ -94,6 +94,17 @@ public abstract class Database<db> {
       }
      }
      }
+     abstract String lineRepresentation(db record);//bardo 3ashn kol data base diff
+     public void saveToFile() {
+        try (PrintWriter pw=new PrintWriter(new FileWriter(fileName)))
+        {
+        for(int i=0;i<records.size();i++)
+        {
+         db emp=records.get(i);
+         pw.println(lineRepresentation(records.get(i)));
+        }} catch (IOException e){
+                System.out.println("error saving in file: "+e.getMessage());}
+     }}
     
    
 }
