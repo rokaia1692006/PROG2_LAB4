@@ -4,6 +4,7 @@
  */
 package prog2_lab4;
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -66,7 +67,7 @@ public class ProductDatabase implements Database<Product>{
     @Override
     public boolean contains(String key) {
     for (Product pr : records){
-    if(pr.getSaerchKey().equals(key)){
+    if(pr.getSaerchKey().equalsIgnoreCase(key)){
     return true;
     }
     
@@ -77,23 +78,58 @@ public class ProductDatabase implements Database<Product>{
 
     @Override
     public Product getRecord(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        for(Product pr : records){
+        if(pr.getSaerchKey().equals(key)){
+        return pr;
+        }
+        }
+        return null;
     }
 
     @Override
     public void insertRecord(Product record) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(contains(record.getSaerchKey())){
+            System.err.println("ALREADY IN RECORD");
+        
+        }
+        else{
+        records.add(record);
+            System.out.println("RECORD ADDED");
+        }
     }
 
     @Override
     public void deleteRecord(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      Product del = getRecord(key);
+      if(del  == null){
+          System.out.println("NO RECORD PRESENT"); 
+      return;
+      
+      }
+      else{
+          records.remove(del);
+          System.out.println("RECORD DELETED"); 
+      
+      
+      }
     }
 
     @Override
     public void saveToFile() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      try(FileWriter write = new FileWriter(FileName)){
+      for(Product pr : records){
+      write.write(pr.lineRepresentation() + "\n");
+        }
+      }catch (Exception e) {
+      System.err.println("ERROR : " + e.getMessage());
+      
+    }
+      
     }
     
-    
 }
+
+    
+    
+    
+
