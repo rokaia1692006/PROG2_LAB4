@@ -1,7 +1,7 @@
 
 package newclass;
 
-//dummy class 3shan bs el error yeroh
+//dumy class 3shan bs el error yeroh
 public class EmployeeUserDatabase{
     
 }
