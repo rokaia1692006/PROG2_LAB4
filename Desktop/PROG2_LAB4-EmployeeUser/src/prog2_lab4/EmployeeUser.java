@@ -20,11 +20,13 @@ public class EmployeeUser {
 
     private boolean isValid(String tocheck)
     {
-        return !(tocheck == null || tocheck.isEmpty() || !tocheck.matches("[A-Za-z]+")); //est3mlt el regex
+        return !(tocheck == null || tocheck.isEmpty() || !tocheck.matches("[A-Za-z]+")); 
         
     }
     public void setEmployeeID(String employeeID) {
-        if (!contains(employeeID)){
+        
+        EmployeeUserDatabase db = new EmployeeUserDatabase();
+        if (!db.contains(employeeID)){
         this.employeeID = employeeID; 
         }
         else{
@@ -39,7 +41,7 @@ public class EmployeeUser {
         }
         
         else
-        { //didnt include it in the isValid method, because the error message for each is different; to tell the user if its error ir name OR address 
+        { 
             System.out.println("Error in name; empty name or incorrect format.");
             
         }
@@ -56,7 +58,7 @@ public class EmployeeUser {
     }
 
     public void setEmail(String email) {
-        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"; //da el regex
+        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"; 
         if (email.matches(regex)){
         this.email = email;
         return;
@@ -64,7 +66,6 @@ public class EmployeeUser {
         System.out.println("Error, invalid email.");
     }
 
-    
 
     public void setPhoneNumber(String phoneNumber) {
         if (phoneNumber.length() != 11 || !(phoneNumber.startsWith("0")))
@@ -94,13 +95,7 @@ public class EmployeeUser {
     public String getPhoneNumber() {
         return phoneNumber;
     }
-    
-    private boolean contains( String employeeID )
-    {
-        //just a dummy method, until we merge
-        return false;
-    }
-    
+     
     public String lineRepresentation()
     {
         return employeeID+","+name+","+email+","+address+","+phoneNumber;
