@@ -122,9 +122,17 @@ public class EmployeeRole {
     //helped method 3shan a7sb el ayam abl el purchase date wala 3ada 14 youm wala eh
     public int howManyDays( LocalDate purchaseDate, LocalDate returnDate)
     {
-        if ( returnDate.isBefore(purchaseDate)) return -1;
+        if ( returnDate.isBefore(purchaseDate)) {
+            System.out.println("Error, Return date is before the Purchase date.");
+            return -1;
+            
+        }
         if (returnDate.isEqual(purchaseDate)) return 0; //allowed 3ady, bs for future use 3mltha terg3le 0
-        if (returnDate.isAfter(purchaseDate.plusDays(14))) return -1;
+        if (returnDate.isAfter(purchaseDate.plusDays(14))) {
+            System.out.println("Error, 14 days passed since the Purchase date, cannot return.");
+            return -1;
+            
+        }
         return 1; //within the 14 days, acceptable
         
     }
@@ -146,7 +154,7 @@ public class EmployeeRole {
     }
     
     //helper brdo
-    public int FoundInCustomersProduct (String customerSSN, String productID, LocalDate purchaseDate) throws FileNotFoundException
+    public int FoundInCustomerProduct (String customerSSN, String productID, LocalDate purchaseDate) throws FileNotFoundException
     {
         CustomerProduct[] c = getListOfPurchasingOperations();
         
@@ -157,6 +165,7 @@ public class EmployeeRole {
                 return 1;
             }
         }
+        System.out.println("Error, cannot find the customer details in CustomerProduct.txt ");
         return -1;
         
     }
@@ -164,14 +173,76 @@ public class EmployeeRole {
     public double returnProduct(String customerSSN, String productID, LocalDate purchaseDate ,LocalDate returnDate) throws FileNotFoundException
     {
         
-        if ( howManyDays(purchaseDate,returnDate) == -1 || FoundInProduct(productID) == -1 || FoundInCustomersProduct(customerSSN,productID,returnDate) == -1)
+        if ( howManyDays(purchaseDate,returnDate) == -1 || FoundInProduct(productID) == -1 || FoundInCustomerProduct(customerSSN,productID,returnDate) == -1)
         {
-            // cannot return the product
+            return -1;
         }
         else {
-            //return the product
+            
+            // el remove mn customer
+            CustomerProduct customer = new CustomerProduct();
+            customer.deleteRecord(getSearchKey());
+            
+            
+            //el update f product
+            Product product = productgetRecord(productID); //ngeb el product 
+            product.setQuantity(product.getQuantity() + 1); //hanzwd el quantity b 1
+            String line = product.linerepresentation();
+            String[] split = line.split(",");
+            double price = Integer.parseInt(split[5]); //el price howa khames haga fel line representation
+            return price;
         }
         
+    } 
+    
+    public boolean applyPayment( String customerSSN, LocalDate purchaseDate) throws FileNotFoundException
+    {
+        CustomerProduct[] cp = getListOfPurchasingOperations(); //hanakhod kolo 3shan m3nash 8er SSN w date, fa han-search behm 3al record
+        CustomerProduct wanted = null;
+        for (int i = 0 ; i < cp.length ; i++)
+        {
+            if (cp[i] != null && cp[i].getCustomerSSN().equals(customerSSN) && cp[i].getPurchaseDate().equals(purchaseDate))
+            {
+                wanted = cp[i]; //l2ena el record mn el list kolaha b est3mal el SSN w date bs
+            }
+            
+        }
+        
+        if (wanted == null) {
+            System.out.println("Couldn't find the record with the given parameters.");
+            return false;
+        }
+        
+        if (wanted.isPaid())
+        {
+            System.out.println("Product is already updated to 'paid'");
+            return true; //or false? mesh mot2kda. bs hwa true l2no la2ah bs l2ah paid
+        }
+        
+        wanted.setPaid(true);
+
+        //n7ot else w error message? 
+         return true;
+        
+        
+    }
+    
+    
+    public void logout()
+    {
+        //han-save all the unsaved data into Products.txt w CustomerProduct.txt
+    }
+    
+    
+    
+    
+    //dummy, 3shan error el return product method
+    private Product productgetRecord(String productID) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private CustomerProduct getSearchKey() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     
@@ -215,6 +286,22 @@ public class EmployeeRole {
         }
 
         private Object getPurchaseDate() {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        private CustomerProduct getSearchKey() {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        private void deleteRecord(CustomerProduct searchKey) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        private boolean isPaid() {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        private void setPaid(boolean b) {
             throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
     }
