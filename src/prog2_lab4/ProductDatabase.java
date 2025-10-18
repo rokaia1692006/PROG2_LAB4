@@ -13,12 +13,10 @@ import prog2_lab4.Database;
  *
  * @author it
  */
-public class ProductDatabase extends Database<Product>{
-    private ArrayList<Product> records =  new ArrayList<>();
-    private String FileName;
+public class ProductDatabase extends Database{
+
 public ProductDatabase(String fileName) {
-super(fileName);
-this.FileName = fileName;
+        super(fileName);
     }
 
 
@@ -32,20 +30,6 @@ this.FileName = fileName;
             return pr;
     }
 
-    @Override
-    public ArrayList<Product> returnAllRecords() {
-    return this.records;
-    }
-@Override
-public String getSearchKey(Product record){
-return record.getSaerchKey();
-}
-   @Override
-   public String lineRepresentation(Product record){
-   return record.lineRepresentation();
-   
-   }
-    
 }
 
     

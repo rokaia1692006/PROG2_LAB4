@@ -1,4 +1,4 @@
-package employeerolee;
+package prog2_lab4;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.Scanner;
+
 
 
 public class EmployeeRole {
@@ -187,7 +188,7 @@ public class EmployeeRole {
             //el update f product
             Product product = productgetRecord(productID); //ngeb el product 
             product.setQuantity(product.getQuantity() + 1); //hanzwd el quantity b 1
-            String line = product.linerepresentation();
+            String line = product.lineRepresentation();
             String[] split = line.split(",");
             double price = Integer.parseInt(split[5]); //el price howa khames haga fel line representation
             return price;
