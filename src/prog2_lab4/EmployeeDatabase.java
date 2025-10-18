@@ -4,35 +4,15 @@
  */
 package prog2_lab4;
 
+public class EmployeeDatabase extends Database {
 
-
-
-public class EmployeeDatabase extends Database implements Record
-{
-
-    @Override
-    Record createRecordFrom(String line) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public EmployeeDatabase(String fileName) {
+        super(fileName);
     }
 
     @Override
-    public String getSearchKey() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Record createRecordFrom(String line) {
+        String[] parts = line.split(",");
+        return new EmployeeUser(parts[0], parts[1], parts[2], parts[3], parts[4]);
     }
-
-    @Override
-    public String lineRepresentation() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
-    
-} 
-   
-    
-    
-    
-    
-
-
-
-
+}   
