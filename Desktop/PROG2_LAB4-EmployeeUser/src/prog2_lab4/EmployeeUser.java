@@ -20,7 +20,7 @@ public class EmployeeUser {
 
     private boolean isValid(String tocheck)
     {
-        return !(tocheck == null || tocheck.isEmpty() || !tocheck.matches("[A-Za-z]+"));
+        return !(tocheck == null || tocheck.isEmpty() || !tocheck.matches("[A-Za-z]+")); //est3mlt el regex
         
     }
     public void setEmployeeID(String employeeID) {
