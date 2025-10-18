@@ -18,7 +18,7 @@ public class CustomerProduct {
     private boolean paid;
 
     public CustomerProduct(String customerSSN, String productID, LocalDate purchaseDate) {
-        this.customerSSN = customerSSN;
+        setCustomerSSN(customerSSN);
         this.productID = productID;
         this.purchaseDate = purchaseDate;
     }
@@ -37,7 +37,7 @@ public class CustomerProduct {
         if(customerSSN==null||customerSSN.trim().isEmpty())
             System.out.println("Error. Empty SSN.");
         else if(customerSSN.length()!=10){
-            System.out.println("Error. Must be ten digits.");
+            System.out.println("Error. SSN must be ten digits.");
         }
         else{
             for(int i=0;i<10;i++){
