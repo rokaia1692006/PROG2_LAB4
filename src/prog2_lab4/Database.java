@@ -56,11 +56,10 @@ public abstract class Database {
         return records;
     }
 
-    abstract String getSearchKey(Record record);//3ashn employee wproduct kol wa7d by call el function b tar2to 
-
     public boolean contains(String key) {
         for (int i = 0; i < records.size(); i++) {
-            if (getSearchKey(records.get(i)).equals(key)) {
+             Record rec = records.get(i);
+            if (rec.getSearchKey().equals(key)) {
                 return true;
             }
         }
@@ -69,7 +68,8 @@ public abstract class Database {
 
     public Record getRecord(String key) {
         for (int i = 0; i < records.size(); i++) {
-            if (getSearchKey(records.get(i)).equals(key)) {
+             Record rec = records.get(i);
+            if (rec.getSearchKey().equals(key)) {
                 return records.get(i);
             }
         }
@@ -77,7 +77,8 @@ public abstract class Database {
     }
 
     public void insertRecord(Record record) {
-        String key = getSearchKey(record);
+        Record emp=record;
+        String key = emp.getSearchKey();
         if (contains(key)) {
             System.out.println("a record with the same key already exists");
         } else {
@@ -87,7 +88,8 @@ public abstract class Database {
 
     public void deleteRecord(String key) {
         for (int i = 0; i < records.size(); i++) {
-            if (getSearchKey(records.get(i)).equals(key)) {
+             Record rec =records.get(i);
+            if (rec.getSearchKey().equals(key)) {
                 records.remove(i);
                 break;
             }
