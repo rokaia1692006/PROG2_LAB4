@@ -7,47 +7,20 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import prog2_lab4.Database;
 
 /**
  *
  * @author it
  */
-public class ProductDatabase implements Database<Product>{
+public class ProductDatabase extends Database<Product>{
     private ArrayList<Product> records =  new ArrayList<>();
     private String FileName;
-    
-
-    @Override
-    public void readFromFile() {
-        try{
-        File file = new File(FileName);
-        Scanner scan = new Scanner(file);
-        while(scan.hasNextLine()){
-            String line = scan.nextLine();
-            try{
-            records.add(createRecordFrom(line));
-        
-            }
-            catch(IllegalArgumentException e){
-                System.err.println("ERROR : "+ e.getMessage());
-            
-            }
-        
-        }
-        
-        }
-        catch (Exception e){
-            System.err.println("ERROR : "+e.getMessage());
-        
-        
-        
-        }
+public ProductDatabase(String fileName) {
+super(fileName);
+this.FileName = fileName;
     }
 
-    public ProductDatabase(String FileName) {
-      
-        this.FileName = FileName;
-    }
 
     @Override
     public Product createRecordFrom(String line) {
@@ -63,69 +36,15 @@ public class ProductDatabase implements Database<Product>{
     public ArrayList<Product> returnAllRecords() {
     return this.records;
     }
-
-    @Override
-    public boolean contains(String key) {
-    for (Product pr : records){
-    if(pr.getSaerchKey().equalsIgnoreCase(key)){
-    return true;
-    }
-    
-    }
-    
-    return false;
-    }
-
-    @Override
-    public Product getRecord(String key) {
-        for(Product pr : records){
-        if(pr.getSaerchKey().equals(key)){
-        return pr;
-        }
-        }
-        return null;
-    }
-
-    @Override
-    public void insertRecord(Product record) {
-        if(contains(record.getSaerchKey())){
-            System.err.println("ALREADY IN RECORD");
-        
-        }
-        else{
-        records.add(record);
-            System.out.println("RECORD ADDED");
-        }
-    }
-
-    @Override
-    public void deleteRecord(String key) {
-      Product del = getRecord(key);
-      if(del  == null){
-          System.out.println("NO RECORD PRESENT"); 
-      return;
-      
-      }
-      else{
-          records.remove(del);
-          System.out.println("RECORD DELETED"); 
-      
-      
-      }
-    }
-
-    @Override
-    public void saveToFile() {
-      try(FileWriter write = new FileWriter(FileName)){
-      for(Product pr : records){
-      write.write(pr.lineRepresentation() + "\n");
-        }
-      }catch (Exception e) {
-      System.err.println("ERROR : " + e.getMessage());
-      
-    }
-      
-    }
+@Override
+public String getSearchKey(Product record){
+return record.getSaerchKey();
+}
+   @Override
+   public String lineRepresentation(Product record){
+   return record.lineRepresentation();
+   
+   }
     
 }
 
