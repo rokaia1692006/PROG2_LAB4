@@ -12,7 +12,7 @@ import java.util.Locale;
  *
  * @author malak
  */
-public class CustomerProduct {
+public class CustomerProduct implements Record{
     private String customerSSN, productID;
     private LocalDate purchaseDate;
     private boolean paid;
@@ -22,10 +22,12 @@ public class CustomerProduct {
         setProductID(productID);
         setPurchaseDate(purchaseDate);
     }
+    @Override
     public String lineRepresentation(){
         DateTimeFormatter format=DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return getCustomerSSN()+","+getProductID()+","+getPurchaseDate().format(format)+","+isPaid();
     }
+    @Override
     public String getSearchKey(){
         DateTimeFormatter format=DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return getCustomerSSN()+","+getProductID()+","+getPurchaseDate().format(format);

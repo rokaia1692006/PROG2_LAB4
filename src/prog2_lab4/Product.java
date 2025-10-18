@@ -21,7 +21,7 @@ import java.util.HashSet;
 // contains 4 methods getquantity() setQauntity() 
 // getSaerchKey return product id
 //>lineRepresentation "" prints data of product coma seperated ""
-public class Product {
+public class Product implements Record{
     private String productID , productName , manufacturerName , supplierName;
     private int quantity; // units available to sell
     private float price; 
@@ -90,9 +90,11 @@ else{
         this.quantity = quantity;
         }
     }
-    public String getSaerchKey(){
+    @Override
+    public String getSearchKey(){
     return this.productID;
     }
+    @Override
     //ID,NAME,MANUFACTURER,SUPPLIER,QUANT,PRICE
     public String lineRepresentation(){
     String line = this.productID+","+this.productName+","+this.manufacturerName+","+this.supplierName+","+this.quantity+","+this.price;

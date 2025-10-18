@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author malak
  */
-public class CustomerProductDatabase extends Database<CustomerProduct> {
+public class CustomerProductDatabase extends Database{
 
     public CustomerProductDatabase(String fileName) {
         super(fileName);
@@ -23,9 +23,4 @@ public class CustomerProductDatabase extends Database<CustomerProduct> {
         DateTimeFormatter format=DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return new CustomerProduct(parts[0], parts[1], LocalDate.parse(parts[2],format));
     }
-    @Override
-    public ArrayList<CustomerProduct> returnAllRecords(){
-        return getRecords();
-    }
-    
 }
