@@ -105,8 +105,6 @@ public abstract class Database<db> {
         }} catch (IOException e){
                 System.out.println("error saving in file: "+e.getMessage());}
      }}
-    
-   
-
+    //..
 
 
