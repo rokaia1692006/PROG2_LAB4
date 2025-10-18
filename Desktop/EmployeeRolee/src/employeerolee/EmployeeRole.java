@@ -125,7 +125,7 @@ public class EmployeeRole {
         if ( returnDate.isBefore(purchaseDate)) return -1;
         if (returnDate.isEqual(purchaseDate)) return 0; //allowed 3ady, bs for future use 3mltha terg3le 0
         if (returnDate.isAfter(purchaseDate.plusDays(14))) return -1;
-        return 1; //within the 14 days
+        return 1; //within the 14 days, acceptable
         
     }
     
