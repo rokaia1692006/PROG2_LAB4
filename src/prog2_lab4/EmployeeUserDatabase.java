@@ -4,9 +4,9 @@
  */
 package prog2_lab4;
 
-public class EmployeeDatabase extends Database {
+public class EmployeeUserDatabase extends Database {
 
-    public EmployeeDatabase(String fileName) {
+    public EmployeeUserDatabase(String fileName) {
         super(fileName);
     }
 
