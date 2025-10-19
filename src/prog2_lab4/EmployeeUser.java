@@ -61,7 +61,7 @@ public class EmployeeUser implements Record {
     }
 
     public void setEmail(String email) {
-        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"; 
+        String regex = "^[A-Za-z0-9][A-Za-z0-9+_.-]*[A-Za-z0-9]@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"; 
         if (email.matches(regex)){
         this.email = email;
         }
