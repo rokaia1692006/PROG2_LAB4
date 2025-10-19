@@ -1,0 +1,4 @@
+P2394,Laptop,Apple,TechSupplier,10,1500.0
+P2395,Phone,Samsung,MobileHub,20,950.0
+P2396,Headphones,Sony,SoundWorld,15,300.0
+44444,amaliflhayah,ana,ana,2,100.0

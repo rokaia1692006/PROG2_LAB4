@@ -4,8 +4,6 @@
  */
 package prog2_lab4;
 
-import java.util.HashSet;
-
 /**
  *
  * @author it
@@ -41,11 +39,11 @@ public class Product implements Record{
         this.price = price;
        
     }
-    private boolean validatePID(String id){
-    if()
+    // private boolean validatePID(String id){
+    // if()
     
     
-    }
+    // }
     private boolean validatePrice(float price){
     if(price <= 0){
     return false;
