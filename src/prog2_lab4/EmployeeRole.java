@@ -13,6 +13,7 @@ public class EmployeeRole {
 
      private ProductDatabase productsDatabase;
      private CustomerProductDatabase customerProductDatabase;
+     final static float DEFAULT_PRICE = 100;
      
      
     public EmployeeRole() {
@@ -20,10 +21,10 @@ public class EmployeeRole {
         customerProductDatabase = new CustomerProductDatabase("CustomerProduct.txt");
     }
 
-    public void addProduct(String productID, String productName, String manufacturerName, String supplierName, int price, int quantity) throws IOException{
+    public void addProduct(String productID, String productName, String manufacturerName, String supplierName,int quantity) throws IOException{
         
         
-        Product product = new Product(productID,productName,manufacturerName,supplierName,price,quantity);
+        Product product = new Product(productID,productName,manufacturerName,supplierName,quantity,DEFAULT_PRICE);
          productsDatabase.createRecordFrom(product.lineRepresentation());
          productsDatabase.insertRecord(product);
          
@@ -89,7 +90,7 @@ public class EmployeeRole {
     {
         CustomerProduct c = new CustomerProduct(customerSSN,productID,purchaseDate);
         String line = c.getSearchKey();
-        if ( howManyDays(purchaseDate,returnDate) == -1 || !productsDatabase.contains(productID) || !customerProductDatabase.contains(c))
+        if ( howManyDays(purchaseDate,returnDate) == -1 || !productsDatabase.contains(productID) || !customerProductDatabase.contains(line))
         {
             return -1;
         }
