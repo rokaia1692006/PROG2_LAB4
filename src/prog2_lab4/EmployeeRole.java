@@ -4,6 +4,7 @@ package prog2_lab4;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 
@@ -21,10 +22,10 @@ public class EmployeeRole {
         customerProductDatabase = new CustomerProductDatabase("CustomerProduct.txt");
     }
 
-    public void addProduct(String productID, String productName, String manufacturerName, String supplierName,int quantity) throws IOException{
+    public void addProduct(String productID, String productName, String manufacturerName, String supplierName,int quantity,float price) throws IOException{
         
         
-        Product product = new Product(productID,productName,manufacturerName,supplierName,quantity,DEFAULT_PRICE);
+        Product product = new Product(productID,productName,manufacturerName,supplierName,quantity,price);
          productsDatabase.createRecordFrom(product.lineRepresentation());
          productsDatabase.insertRecord(product);
          
@@ -54,14 +55,20 @@ public class EmployeeRole {
                     return false;
                 }
                 else {
+                    DateTimeFormatter format=DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                    String KEY = customerSSN+","+productID+","+purchaseDate.format(format);
+                    if(customerProductDatabase.contains(KEY)){
+                    throw new IllegalArgumentException("CANT PURCHASE ITEM TWICE ON THE SAME DAY");
+                    }else{
                     product.setQuantity(product.getQuantity() - 1);
                     
                     CustomerProduct cp = new CustomerProduct(customerSSN,productID,purchaseDate);
                     cp.setPaid(false);
-                    customerProductDatabase.createRecordFrom(cp.lineRepresentation());
+                    customerProductDatabase.insertRecord(cp);
+                    
                     
                     System.out.println("Eeverything successful.");
-                    return true;
+                    return true;}
                 }
      
     

@@ -30,14 +30,12 @@ public class EmployeeUser implements Record {
     public void setEmployeeID(String employeeID)
     
     {
-        
-        EmployeeUserDatabase emp = new EmployeeUserDatabase("Employees.txt");
-        if (!emp.contains(employeeID)){
-        this.employeeID = employeeID; 
+        if(!(employeeID  == null || employeeID.isEmpty())){
+       this.employeeID = employeeID;
         }
         else{
-            System.out.println("Employee ID is not unique; it must be unique.");
-        }
+       throw new IllegalArgumentException("ID EMPTY");
+            }
     }
 
     public void setName(String name)  {
@@ -59,7 +57,7 @@ public class EmployeeUser implements Record {
        
         }
         else {
-            throw new IllegalArgumentException("Error in name; empty address or incorrect format.");
+            throw new IllegalArgumentException("Error in Address; empty address or incorrect format.");
      
         }
     }
