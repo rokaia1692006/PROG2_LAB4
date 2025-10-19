@@ -103,6 +103,11 @@ else{
     
     
     }
+
+    public float getPrice() {
+        return price;
+    }
+    
     
    
 
