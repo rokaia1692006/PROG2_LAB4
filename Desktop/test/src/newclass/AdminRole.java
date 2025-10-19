@@ -84,20 +84,9 @@ public class AdminRole {
         writer.close();
     }
         
-      public void logout() throws IOException
+      public void logout() 
       {
-          FileWriter writer = new FileWriter("Employees.txt",false);
-          PrintWriter p = new PrintWriter(writer);
-          
-          EmployeeUser[] users = getListOfEmployees();
-          
-          for (int i = 0; i < users.length; i ++)
-          {
-              if (users[i] != null)
-              {p.println(users[i].lineRepresentation());} 
-          }
-          p.close();
-          writer.close();
+          database.saveToFile();
       }
     
 }
