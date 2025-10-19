@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 public class AdminRole {
     
-    private EmployeeDatabase database;
+    private EmployeeUserDatabase database;
     
     public AdminRole(){
-        database = new EmployeeDatabase("Employees.txt");
+        database = new EmployeeUserDatabase("Employees.txt");
     }
     
     public void addEmployee( String employeeID, String name, String email, String address, String phoneNumber) throws FileNotFoundException, IOException
