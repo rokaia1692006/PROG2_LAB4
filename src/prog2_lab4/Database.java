@@ -26,6 +26,7 @@ public abstract class Database {
     public Database(String fileName) {
         this.fileName = fileName;
         this.records = new ArrayList<>();
+        this.readFromFile();
     }
 //using getters to allow sub classes to access them
 
@@ -39,7 +40,7 @@ public abstract class Database {
 
     abstract Record createRecordFrom(String line);//diff in each data base bas they both have the method 
 
-    public void readFromFile() {
+    public final void readFromFile() {
         records.clear();// to be sure en file is empty
         try (BufferedReader br = new BufferedReader(new FileReader(fileName)))// buffer reader by5lny a read line line from file
         {

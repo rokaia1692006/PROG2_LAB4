@@ -18,9 +18,13 @@ public class AdminRole {
     {
        EmployeeUser user = new EmployeeUser(employeeID,name,email,address,phoneNumber);
        String line = user.lineRepresentation();
-       
+       if(!database.contains(employeeID)){
        database.createRecordFrom(line);
-       database.insertRecord(user);
+       database.insertRecord(user);}
+       else{
+       throw new IllegalArgumentException("ID ALREADY EXISTS");
+       
+       }
        
         
     }
