@@ -27,7 +27,7 @@ public class EmployeeUser implements Record {
     
     {
         
-        EmployeeDatabase emp = new EmployeeDatabase("Employees.txt");
+        EmployeeUserDatabase emp = new EmployeeUserDatabase("Employees.txt");
         if (!emp.contains(employeeID)){
         this.employeeID = employeeID; 
         }
