@@ -18,9 +18,13 @@ public class EmployeeUser implements Record {
         setPhoneNumber(phoneNumber);
     }
 
-    private boolean isValid(String tocheck)
+    public boolean isValid(String tocheck)
     {
-        return !(tocheck == null || tocheck.isEmpty() || !tocheck.matches("[A-Za-z]+")); 
+        if( !(tocheck == null || tocheck.isEmpty() || !tocheck.matches("[A-Za-z]+")))
+        {
+            return true;
+        }
+        else return false;
         
     }
     public void setEmployeeID(String employeeID)
