@@ -2,10 +2,9 @@ package prog2_lab4;
 
 
 import java.io.FileNotFoundException;
-
 import java.io.IOException;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 
 
@@ -32,22 +31,22 @@ public class EmployeeRole {
     
     public Product[] getListOfProducts() throws FileNotFoundException{
         
-       Product<Product> p = productsDatabase.returnAllRecords(); 
-       Product[] product = p.toArray();
+       ArrayList<Product> p = (ArrayList<Product>)(ArrayList<?>) productsDatabase.returnAllRecords(); 
+       Product[] product = p.toArray(Product[]::new);
        return product;
     }
     
     public CustomerProduct[] getListOfPurchasingOperations() throws FileNotFoundException{
         
-        CustomerProduct<CustomerProduct> c = customerProductDatabase.returnAllRecords();
-        CustomerProduct[] cp = c.toArray();
+        ArrayList<CustomerProduct> c = (ArrayList<CustomerProduct>) (ArrayList<?>) customerProductDatabase.returnAllRecords();
+        CustomerProduct[] cp = c.toArray(CustomerProduct[]::new);
         return cp;
     }
 
     
     public boolean purchaseProduct ( String customerSSN, String productID, LocalDate purchaseDate) throws FileNotFoundException
     {
-        Product product = productsDatabase.getRecord(productID);
+        Product product = (Product) productsDatabase.getRecord(productID);
 
                 if (product.getQuantity() == 0)
                 {
@@ -99,7 +98,7 @@ public class EmployeeRole {
              String key = cp.getSearchKey();
             customerProductDatabase.deleteRecord(key);
       
-            Product product = productsDatabase.getRecord(productID); 
+            Product product = (Product) productsDatabase.getRecord(productID); 
            
             if (product == null) {
                 return -1;
