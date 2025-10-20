@@ -50,6 +50,7 @@ public abstract class Database {
             }
         } catch (IOException e) {
             System.out.println("error reading from file : " + e.getMessage());
+            
         }
     }
 
@@ -81,7 +82,7 @@ public abstract class Database {
         Record emp=record;
         String key = emp.getSearchKey();
         if (contains(key)) {
-            System.out.println("a record with the same key already exists");
+            throw new IllegalArgumentException("key already exists");
         } else {
             records.add(record);
         }
