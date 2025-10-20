@@ -4,26 +4,14 @@
  */
 package prog2_lab4;
 
-import java.util.HashSet;
-
 /**
  *
  * @author it
  */
-// all info from products.txt but thats not my issue rn 
-//ID,NAME,MANUFACTURER,SUPPLIER,QUANT,PRICE
-//Note: The product id is unique for each product ok...
-//P2394,Laptop,Apple,TechSupplier,10,1500
-//uer takes a unit and quantity dec by 1 AND THEY RETURN IT why?
-// the products apperntly have a return policy
-// 0 = all products sold
-// one constructor takes all 
-// contains 4 methods getquantity() setQauntity() 
-// getSaerchKey return product id
-//>lineRepresentation "" prints data of product coma seperated ""
+
 public class Product implements Record{
     private String productID , productName , manufacturerName , supplierName;
-    private int quantity; // units available to sell
+    private int quantity; 
     private float price; 
    
 
@@ -42,6 +30,9 @@ public class Product implements Record{
         throw new IllegalArgumentException("PRICE CANNOT BE ZERO OR NEGATIVE");
         
         }
+        if(!validatePID(productID)){
+        throw new IllegalArgumentException("ID MUST START WITH P/p and followed by 4 numbers");
+        }
      
         this.productID  = productID;
         this.productName = productName;
@@ -51,6 +42,10 @@ public class Product implements Record{
         this.price = price;
        
     }
+    private boolean validatePID(String id){
+    return id.matches("^[Pp][0-9]{4}$");
+     
+     }
     private boolean validatePrice(float price){
     if(price <= 0){
     return false;
