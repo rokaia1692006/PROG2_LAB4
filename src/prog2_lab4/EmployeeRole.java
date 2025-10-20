@@ -65,7 +65,7 @@ public class EmployeeRole {
                     CustomerProduct cp = new CustomerProduct(customerSSN,productID,purchaseDate);
                     cp.setPaid(false);
                     customerProductDatabase.insertRecord(cp);
-                    
+                   
                     
                     System.out.println("Eeverything successful.");
                     return true;}

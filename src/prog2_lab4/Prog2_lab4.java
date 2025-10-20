@@ -198,17 +198,22 @@ System.out.println(r.lineRepresentation());
                     System.out.println("ENTER PURCHASE DATE (YYYY-MM-DD): ");
                     LocalDate purdate = LocalDate.parse(scan.nextLine());
                     System.out.println("ENTER RETURN DATE (YYYY-MM-DD): ");
-                    LocalDate retdate = LocalDate.parse(scan.nextLine());
+                    try{
+                             DateTimeFormatter format=DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                        LocalDate retdate = formatter(LocalDate.now().format(format));
                     try{
                     double refund = emp.returnProduct(rssn, rpid, purdate, retdate);
                     if(refund == -1){
                         System.out.println("RETURN FAILED");
                     } else {
-                        System.out.println("RETURN SUCCESSFUL. REFUND AMOUNT: " + refund);
+                        System.out.println("REFUND AMOUNT: " + refund);
                     }}
                     catch(Exception e){
                     System.err.println("ERROR : "+ e.getMessage());
                     break;
+                    }}
+                    catch(Exception e){
+                        System.err.println("ERROR DATE INCORRECT");
                     }
                     break;
                     

@@ -30,6 +30,9 @@ public class Product implements Record{
         throw new IllegalArgumentException("PRICE CANNOT BE ZERO OR NEGATIVE");
         
         }
+        if(!validatePID(productID)){
+        throw new IllegalArgumentException("ID MUST START WITH P/p and followed by 4 numbers");
+        }
      
         this.productID  = productID;
         this.productName = productName;
@@ -39,11 +42,10 @@ public class Product implements Record{
         this.price = price;
        
     }
-    // private boolean validatePID(String id){
-    // if()
-    
-    
-    // }
+    private boolean validatePID(String id){
+    return id.matches("^[Pp][0-9]{4}$");
+     
+     }
     private boolean validatePrice(float price){
     if(price <= 0){
     return false;
