@@ -195,9 +195,9 @@ System.out.println(r.lineRepresentation());
                     String rssn = scan.nextLine();
                     System.out.println("ENTER PRODUCT ID: ");
                     String rpid = scan.nextLine();
-                    System.out.println("ENTER PURCHASE DATE (YYYY-MM-DD): ");
-                    LocalDate purdate = LocalDate.parse(scan.nextLine());
-                    System.out.println("ENTER RETURN DATE (YYYY-MM-DD): ");
+                    System.out.println("ENTER PURCHASE DATE (DD-MM-YYYY): ");
+                    LocalDate purdate = formatter(scan.nextLine());
+                    System.out.println("ENTER RETURN DATE (DD-MM-YYYY): ");
                     try{
                              DateTimeFormatter format=DateTimeFormatter.ofPattern("dd-MM-yyyy");
                         LocalDate retdate = formatter(LocalDate.now().format(format));
@@ -220,8 +220,8 @@ System.out.println(r.lineRepresentation());
                 case 9:
                     System.out.println("ENTER CUSTOMER SSN: ");
                     String pssn = scan.nextLine();
-                    System.out.println("ENTER PURCHASE DATE (YYYY-MM-DD): ");
-                    LocalDate paydate = LocalDate.parse(scan.nextLine());
+                    System.out.println("ENTER PURCHASE DATE (DD-MM-YYYY): ");
+                    LocalDate paydate = formatter(scan.nextLine());
                     try{
                     boolean paid = emp.applyPayment(pssn, paydate);
                     if(paid){
